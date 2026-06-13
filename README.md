@@ -1,108 +1,79 @@
-<img width="1084" height="676" alt="image" src="https://github.com/user-attachments/assets/723319fc-e67a-47d8-a3bc-5c76be7547c4" />
+# Excel Merge Tool / Excel 合并工具
 
-Excel Merge Tool / Excel 合并工具
+![Version](https://img.shields.io/badge/version-1.0.1-blue)
+![Platform](https://img.shields.io/badge/macOS-Apple%20Silicon-black)
+![Python](https://img.shields.io/badge/Python-3.9%2B-green)
 
-一个用于批量合并 Excel 文件的桌面工具，适合日常办公、财务对账、订单汇总、月报整理等场景。
+一个面向日常办公的 Excel 批量合并工具。它可以按列表顺序合并多个
+`.xlsx` 或 `.xlsm` 文件，并保留单元格格式、公式、列宽和合并单元格。
 
-A desktop tool for batch merging Excel files. It is suitable for daily office work, financial reconciliation, order summary, monthly reports, and other data processing tasks.
+A desktop utility for merging `.xlsx` and `.xlsm` files in a chosen order
+while preserving cell formatting, formulas, column widths, and merged cells.
 
-⸻
+## 主要功能 / Features
 
-功能介绍 / Overview
+- 添加单个文件或递归添加整个文件夹
+- 通过“上移 / 下移”按钮调整合并顺序
+- 后续文件可跳过 `0-99` 行表头
+- 自动保留字体、填充、边框、对齐、数字格式和保护设置
+- 自动调整复制后的公式引用
+- 可选择是否保留合并单元格
+- 保存窗口跟随 macOS 系统语言
+- 普通工作簿使用低内存流式合并，复杂合并单元格自动切换兼容模式
 
-本工具可以将多个 Excel 文件按照文件名顺序合并到一个 Excel 文件中，减少手动复制粘贴的工作量，提高表格整理效率。
+## 使用方法 / Usage
 
-This tool can merge multiple Excel files into one Excel workbook according to the file name order. It helps reduce manual copying and pasting, and improves the efficiency of spreadsheet processing.
+1. 打开 `Excel合并工具V1.0.1.app`。
+2. 添加 Excel 文件或包含 Excel 文件的文件夹。
+3. 使用“上移 / 下移”确认文件顺序。
+4. 设置后续文件跳过的行数。
+5. 选择输出文件位置并点击“开始合并”。
 
-⸻
+## 本地运行 / Run from Source
 
-主要特点 / Features
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python main.py
+```
 
-* 支持批量选择多个 Excel 文件
-* Supports selecting multiple Excel files at once
-* 按文件名顺序依次合并
-*  Merges files in file name order
-* 尽量保留原始单元格格式
-* Tries to preserve the original cell formatting
-* 支持输出为新的 Excel 文件
-*  Supports exporting to a new Excel file
-* 操作简单，适合非技术人员使用
-* Simple to use, suitable for non-technical users
-* 适用于日常办公、数据汇总、财务对账等场景
-* Suitable for daily office work, data summary, financial reconciliation, and similar tasks
+## 测试 / Tests
 
-⸻
+```bash
+python -m unittest discover -s tests -v
+```
 
-使用场景 / Use Cases
+性能基准：
 
-这个工具适合处理类似下面的情况：
+```bash
+python scripts/benchmark.py /path/to/excel-folder
+```
 
-This tool is useful in scenarios such as:
+## macOS 构建 / Build for macOS
 
-* 每月需要合并多份 Excel 表格
-* Merging multiple Excel files every month
-* 多个部门提交的表格需要汇总
-* Combining spreadsheets submitted by different departments
-* 订单明细、付款明细、发票明细需要整理到一起
-* Consolidating order details, payment details, and invoice details
-* 不想反复手动复制、粘贴、调整格式
-* Avoiding repeated manual copying, pasting, and formatting
+当前正式构建仅支持 Apple 芯片 Mac：
 
-⸻
+```bash
+PYTHON=.venv/bin/python scripts/build_macos.sh
+```
 
-使用方法 / How to Use
+构建结果位于 `release/`。打包脚本保留所有 `qtbase` 系统语言翻译，并移除
+本工具不使用的 Qt 网络、TLS、SVG 和图片插件。
 
-1. 打开 Excel 合并工具
-* Open the Excel Merge Tool
-2. 选择需要合并的 Excel 文件
-* Select the Excel files you want to merge
-3. 确认文件顺序
-* Check the file order
-4. 选择输出位置
-* Choose the output location
-5. 点击开始合并
-* Click the merge/start button
-6. 等待生成新的合并文件
-* Wait for the merged Excel file to be generated
+## 版本记录 / Changelog
 
-⸻
+### V1.0.1
 
-注意事项 / Notes
+- 优化大文件合并速度并显著降低内存占用
+- 使用轻量 XLSX 元数据扫描加快文件信息读取
+- 自动选择流式模式或合并单元格兼容模式
+- 缓存重复单元格样式
+- 精简 macOS 应用体积
 
-* 建议提前确认文件名顺序，因为工具会按照文件名顺序进行合并
-* It is recommended to check the file name order in advance, because the tool merges files according to file name order
-* 建议被合并的 Excel 文件表头结构保持一致
-* It is recommended that the Excel files have the same header structure
-* 如果原文件格式较复杂，合并后建议人工复核一次
-* If the original files contain complex formatting, manual review after merging is recommended
-* 使用前建议备份原始文件，避免误操作
-* It is recommended to back up the original files before use
+### V1.0.0
 
-⸻
+- 首个正式版本
+- 支持文件、文件夹、排序、保存路径和格式保留
 
-适用平台 / Supported Platforms
-
-目前主要用于本地电脑环境。
-
-Currently designed for local desktop use.
-
-后续可根据需要支持：
-
-Future improvements may include:
-
-* macOS 桌面版
-* macOS desktop version
-* Windows 桌面版
-* Windows desktop version
-* 更多 Excel 格式兼容
-* Better Excel format compatibility
-* 自定义合并规则
-* Custom merge rules
-
-⸻
-
-项目说明 / Project Purpose
-
-这个项目主要是为了解决日常办公中频繁合并 Excel 文件的问题，让重复性表格整理工作变得更简单。
-
-This project was created to solve the common problem of frequently merging Excel files in daily office work, making repetitive spreadsheet tasks easier and faster.
+更多项目历史见 [docs/PROJECT_HISTORY.md](docs/PROJECT_HISTORY.md)。

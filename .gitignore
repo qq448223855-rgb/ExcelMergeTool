@@ -2,6 +2,7 @@
 __pycache__/
 *.py[codz]
 *$py.class
+.DS_Store
 
 # C extensions
 *.so
@@ -31,6 +32,7 @@ MANIFEST
 #   before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
+!packaging/*.spec
 
 # Installer logs
 pip-log.txt
@@ -156,6 +158,12 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+
+# Local release output and benchmark files
+outputs/
+work/
+release/
+*.xlsx
 
 # Spyder project settings
 .spyderproject

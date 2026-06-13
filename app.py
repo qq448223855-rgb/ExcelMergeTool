@@ -94,7 +94,7 @@ class ExcelMergerWindow(QMainWindow):
             preferred_system_locale(),
         )
 
-        self.setWindowTitle("Excel 合并工具 V1.0.0 - 保留格式版")
+        self.setWindowTitle("Excel 合并工具 V1.0.1 - 保留格式版")
         self.resize(1120, 700)
         self.setMinimumSize(900, 580)
 

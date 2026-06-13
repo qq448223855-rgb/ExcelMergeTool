@@ -15,7 +15,7 @@ from excel_merge_tool import SUPPORTED_EXTENSIONS
 
 def main():
     application = QApplication(sys.argv)
-    application.setApplicationName("Excel合并工具V1.0.0")
+    application.setApplicationName("Excel合并工具V1.0.1")
     application.preferred_locale = preferred_system_locale()
     QLocale.setDefault(application.preferred_locale)
     install_qt_translations(application, application.preferred_locale)
